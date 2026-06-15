@@ -18,7 +18,7 @@ public class StudentDao {
 		int result = 0;
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/week3", "root",
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/georgian", "root",
 				"class123")) {
 			// prepared statements..
 			// week6 is schema/db name - change as per your db, "root" remains same , your

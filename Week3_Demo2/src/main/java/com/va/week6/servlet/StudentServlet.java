@@ -31,24 +31,47 @@ public class StudentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstName = request.getParameter("firstname");
-		String lastName = request.getParameter("lastname");
-		String age = request.getParameter("age");
-		
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String country = request.getParameter("country");
+		String zipCode = request.getParameter("zipCode");
+		String email = request.getParameter("email");
+		String sex = request.getParameter("sex");
+		String language = request.getParameter("language");
+		String about = request.getParameter("about");
+
+		if (userId == null || userId.length() < 5 || userId.length() > 12 ||
+			password == null || password.length() < 7 || password.length() > 12 ||
+			name == null || !name.matches("[A-Za-z ]+") ||
+			country == null || country.equals("") ||
+			zipCode == null || !zipCode.matches("[0-9]+") ||
+			email == null || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$") ||
+			sex == null ||
+			language == null) {
+
+			response.sendRedirect("index.jsp");
+			return;
+		}
+
 		/*
 		 * Draft the fields as the per the entity given..  if you have 5 attributes ..
 		 * you must have 5 variable to handle the request from the client. 
 		 */
 
 		Student st = new Student();
-		st.setFirstname(firstName);
-		st.setLastname(lastName);
-		st.setAge(age);
-		//st.setSid(sid);
+		st.setUserId(userId);
+		st.setPassword(password);
+		st.setName(name);
+		st.setAddress(address);
+		st.setCountry(country);
+		st.setZipCode(zipCode);
+		st.setEmail(email);
+		st.setSex(sex);
+		st.setLanguage(language);
+		st.setAbout(about);
 		
-		
-		
-
 		try {
 			stDao.registerStudent(st);
 		} catch (Exception e) {
